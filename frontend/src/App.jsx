@@ -15,7 +15,7 @@ function App() {
     <div className="container">
       <div className="board-header">
         <h1>게시판</h1>
-        <button className="write-btn">글쓰기</button>
+        <button className="write-btn">글쓰기123</button>
       </div>
 
       <table className="board-table">
