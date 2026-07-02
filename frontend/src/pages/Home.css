@@ -1,4 +1,4 @@
-  .home-container {
+ .home-container {
     text-align: center;
     padding: 80px 32px;
   }
@@ -18,15 +18,4 @@
   .enter-btn {
     padding: 12px 28px;
     font-size: 15px;
-    font-weight: 600;
-    color: #fff;
-    background-color: #4a6cf7;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-
-  .enter-btn:hover {
-    background-color: #3b57d6;
   }
