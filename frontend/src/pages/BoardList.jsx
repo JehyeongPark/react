@@ -40,7 +40,11 @@
               </tr>
             ) : (
               boardList.map(board => (
-                <tr key={board.boardNo} className="board-row">
+                <tr
+                  key={board.boardNo}
+                  className="board-row"
+                  onClick={() => navigate(`/board/${board.boardNo}`)}
+                >
                   <td>{board.boardNo}</td>
                   <td className="title">{board.title}</td>
                   <td>{board.writer}</td>

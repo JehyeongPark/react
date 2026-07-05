@@ -14,8 +14,15 @@ public class BoardServiceImpl implements BoardService {
 
     private final BoardMapper boardMapper;
 
+    // 게시판 리스트
     @Override
     public List<BoardVO> selectBoardList() {
         return boardMapper.selectBoardList();
+    }
+
+    // 게시판 상세보기
+    @Override
+    public BoardVO selectBoard(int boardNo) {
+        return boardMapper.selectBoard(boardNo);
     }
 }
