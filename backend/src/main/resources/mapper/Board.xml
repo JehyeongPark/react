@@ -30,5 +30,13 @@
             BOARD_NO = #{boardNo}
     </select>
 
+    <!-- 게시판 등록 -->
+    <insert id="insertBoard" parameterType="kr.com.backend.vo.BoardVO">
+        INSERT INTO TB_BOARD
+            (BOARD_NO, TITLE, CONTENT, WRITER, REG_DT)
+        VALUES
+            ((SELECT NVL(MAX(BOARD_NO), 0) + 1 FROM TB_BOARD), #{title}, #{content}, #{writer}, SYSDATE)
+    </insert>
+
 
 </mapper>

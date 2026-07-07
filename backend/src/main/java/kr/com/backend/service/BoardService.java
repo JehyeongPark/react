@@ -11,4 +11,7 @@ public interface BoardService {
 
     // 게시판 상세보기
     BoardVO selectBoard(int boardNo);
+
+    // 게시판 등록
+    void insertBoard(BoardVO board);
 }

@@ -25,4 +25,10 @@ public class BoardServiceImpl implements BoardService {
     public BoardVO selectBoard(int boardNo) {
         return boardMapper.selectBoard(boardNo);
     }
+
+    // 게시판 등록
+    @Override
+    public void insertBoard(BoardVO board) {
+        boardMapper.insertBoard(board);
+    }
 }

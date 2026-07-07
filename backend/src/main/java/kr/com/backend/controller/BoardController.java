@@ -26,5 +26,11 @@ public class BoardController {
         return boardService.selectBoard(boardNo);
     }
 
+    // 게시판 등록
+    @PostMapping
+    public void insertBoard(@RequestBody BoardVO board) {
+        boardService.insertBoard(board);
+    }
+
 
 }
