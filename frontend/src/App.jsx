@@ -2,6 +2,7 @@
   import Home from './pages/Home'
   import BoardList from './pages/BoardList'
   import BoardDetail from './pages/BoardDetail'
+  import BoardWrite from './pages/BoardWrite'
 
   function App() {
     return (
@@ -9,6 +10,7 @@
         <Route path="/" element={<Home />} />
         <Route path="/board" element={<BoardList />} />
         <Route path="/board/:boardNo" element={<BoardDetail />} />
+        <Route path="/board/write" element={<BoardWrite />} />
       </Routes>
     )
   }

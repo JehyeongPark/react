@@ -20,7 +20,7 @@
           <h1>게시판</h1>
           <div className="board-header-actions">
             <button className="btn-secondary home-btn" onClick={() => navigate('/')}>홈으로</button>
-            <button className="btn-primary write-btn">글쓰기</button>
+            <button className="btn-primary write-btn" onClick={() => navigate('/board/write')}>글쓰기</button>
           </div>
         </div>
 
