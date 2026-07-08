@@ -34,8 +34,9 @@
         </div>
 
         <div className="detail-actions">
-          <button className="btn-secondary" onClick={() => navigate('/board')}>목록으로</button>
-        </div>
+            <button className="btn-secondary" onClick={() => navigate('/board')}>목록으로</button>
+            <button className="btn-primary" onClick={() => navigate(`/board/edit/${boardNo}`)}>수정</button>
+         </div>
       </div>
     )
   }
