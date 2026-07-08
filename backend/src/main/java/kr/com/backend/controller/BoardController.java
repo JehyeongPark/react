@@ -32,5 +32,12 @@ public class BoardController {
         boardService.insertBoard(board);
     }
 
+    // 게시판 수정
+    @PutMapping("/{boardNo}")
+    public void updateBoard(@PathVariable int boardNo, @RequestBody BoardVO board) {
+        board.setBoardNo(boardNo);
+        boardService.updateBoard(board);
+    }
+
 
 }

@@ -31,4 +31,11 @@ public class BoardServiceImpl implements BoardService {
     public void insertBoard(BoardVO board) {
         boardMapper.insertBoard(board);
     }
+
+    // 게시판 수정
+    @Override
+    public void updateBoard(BoardVO board) {
+        boardMapper.updateBoard(board);
+    }
+
 }

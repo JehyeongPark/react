@@ -38,5 +38,16 @@
             ((SELECT NVL(MAX(BOARD_NO), 0) + 1 FROM TB_BOARD), #{title}, #{content}, #{writer}, SYSDATE)
     </insert>
 
+    <!-- 게시판 수정 -->
+    <update id="updateBoard" parameterType="kr.com.backend.vo.BoardVO">
+        UPDATE TB_BOARD
+        SET
+            TITLE = #{title}
+          , CONTENT = #{content}
+          , WRITER = #{writer}
+        WHERE
+            BOARD_NO = #{boardNo}
+    </update>
+
 
 </mapper>
