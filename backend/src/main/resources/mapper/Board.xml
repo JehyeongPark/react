@@ -45,6 +45,7 @@
             TITLE = #{title}
           , CONTENT = #{content}
           , WRITER = #{writer}
+          , REG_DT = SYSDATE
         WHERE
             BOARD_NO = #{boardNo}
     </update>
