@@ -20,7 +20,8 @@ public interface BoardMapper {
     // 게시판 수정
     void updateBoard(BoardVO board);
 
-
+    // 게시판 삭제
+    void deleteBoard(int boardNo);
 
 
 

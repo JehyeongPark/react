@@ -11,23 +11,29 @@
              , TITLE
              , CONTENT
              , WRITER
-             , REG_DT
+             , TO_CHAR(REG_DT, 'YYYY-MM-DD HH24:MI') AS REG_DT
+             , TO_CHAR(UPDATE_DT, 'YYYY-MM-DD HH24:MI') AS UPDATE_DT
         FROM
             TB_BOARD
+        WHERE
+            DEL_YN = 'N'
     </select>
 
     <!-- 게신판 상세보기 -->
-    <select id="selectBoard" resultType="kr.com.backend.vo.BoardVO">
+    <select id="selectBoard" resultType="kr.com.backend.vo.BoardVO" parameterType="int">
         SELECT
             BOARD_NO
              , TITLE
              , CONTENT
              , WRITER
-             , REG_DT
+             , TO_CHAR(REG_DT, 'YYYY-MM-DD HH24:MI') AS REG_DT
+             , TO_CHAR(UPDATE_DT, 'YYYY-MM-DD HH24:MI') AS UPDATE_DT
         FROM
             TB_BOARD
         WHERE
             BOARD_NO = #{boardNo}
+        AND
+            DEL_YN = 'N'
     </select>
 
     <!-- 게시판 등록 -->
@@ -45,10 +51,18 @@
             TITLE = #{title}
           , CONTENT = #{content}
           , WRITER = #{writer}
-          , REG_DT = SYSDATE
+          , UPDATE_DT = SYSDATE
         WHERE
             BOARD_NO = #{boardNo}
     </update>
 
+    <!-- 게시판 삭제 -->
+    <update id="deleteBoard" parameterType="int">
+        UPDATE TB_BOARD
+        SET
+            DEL_YN = 'Y'
+        WHERE
+            BOARD_NO = #{boardNo}
+    </update>
 
 </mapper>

@@ -39,5 +39,11 @@ public class BoardController {
         boardService.updateBoard(board);
     }
 
+    // 게시판 삭제
+    @DeleteMapping("/{boardNo}")
+    public void deleteBoard(@PathVariable int boardNo) {
+        boardService.deleteBoard(boardNo);
+    }
+
 
 }

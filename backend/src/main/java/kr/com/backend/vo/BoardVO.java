@@ -10,5 +10,7 @@ public class BoardVO {
     private String content;
     private String writer;
     private String regDt;
+    private String updateDt;
+    private String delYn;
 
 }
