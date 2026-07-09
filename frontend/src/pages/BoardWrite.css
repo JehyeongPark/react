@@ -1,46 +1,46 @@
-  .write-header {
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid #333;
-  }
+.write-header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #333;
+}
 
-  .write-header h1 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #222;
-  }
+.write-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #222;
+}
 
-  .write-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+.write-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
-  .form-row {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
 
-  .form-row label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #555;
-  }
+.form-row label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
 
-  .form-row input,
-  .form-row textarea {
-    padding: 10px 12px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-family: inherit;
-    resize: vertical;
-  }
+.form-row input,
+.form-row textarea {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  resize: vertical;
+}
 
-  .write-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    margin-top: 24px;
-  }
+.write-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 24px;
+}

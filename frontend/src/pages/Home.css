@@ -1,21 +1,21 @@
- .home-container {
-    text-align: center;
-    padding: 80px 32px;
-  }
+.home-container {
+  text-align: center;
+  padding: 80px 32px;
+}
 
-  .home-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: #222;
-    margin-bottom: 12px;
-  }
+.home-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 12px;
+}
 
-  .home-desc {
-    color: #777;
-    margin-bottom: 32px;
-  }
+.home-desc {
+  color: #777;
+  margin-bottom: 32px;
+}
 
-  .enter-btn {
-    padding: 12px 28px;
-    font-size: 15px;
-  }
+.enter-btn {
+  padding: 12px 28px;
+  font-size: 15px;
+}

@@ -1,66 +1,60 @@
- .board-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid #333;
-  }
+.board-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #333;
+}
 
-  .board-header h1 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #222;
-  }
+.board-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #222;
+}
 
-  .board-header-actions {
-    display: flex;
-    gap: 8px;
-  }
+.board-header-actions {
+  display: flex;
+  gap: 8px;
+}
 
-  .write-btn,
-  .home-btn {
-    padding: 8px 18px;
-    font-size: 14px;
-  }
+.board-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
 
-  .board-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-  }
+.board-table thead th {
+  padding: 12px 8px;
+  background-color: #f5f6f8;
+  color: #555;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+}
 
-  .board-table thead th {
-    padding: 12px 8px;
-    background-color: #f5f6f8;
-    color: #555;
-    font-weight: 600;
-    text-align: center;
-    border-bottom: 1px solid #e0e0e0;
-  }
+.board-table tbody td {
+  padding: 14px 8px;
+  text-align: center;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
 
-  .board-table tbody td {
-    padding: 14px 8px;
-    text-align: center;
-    color: #333;
-    border-bottom: 1px solid #eee;
-  }
+.board-row {
+  transition: background-color 0.15s ease;
+}
 
-  .board-row {
-    transition: background-color 0.15s ease;
-  }
+.board-row:hover {
+  background-color: #f9fafc;
+  cursor: pointer;
+}
 
-  .board-row:hover {
-    background-color: #f9fafc;
-    cursor: pointer;
-  }
+.board-table .title {
+  text-align: left;
+  color: #222;
+}
 
-  .board-table .title {
-    text-align: left;
-    color: #222;
-  }
-
-  .board-table .empty {
-    padding: 48px 0;
-    color: #999;
-  }
+.board-table .empty {
+  padding: 48px 0;
+  color: #999;
+}
