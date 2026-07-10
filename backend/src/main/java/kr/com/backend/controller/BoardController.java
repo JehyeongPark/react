@@ -1,6 +1,7 @@
 package kr.com.backend.controller;
 
 import kr.com.backend.service.BoardService;
+import kr.com.backend.vo.BoardSearchVO;
 import kr.com.backend.vo.BoardVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +17,8 @@ public class BoardController {
 
     // 게시판 리스트
     @GetMapping
-    public List<BoardVO> selectBoardList() {
-        return boardService.selectBoardList();
+    public List<BoardVO> selectBoardList(BoardSearchVO boardSearchVO) {
+        return boardService.selectBoardList(boardSearchVO);
     }
 
     // 게시판 상세보기

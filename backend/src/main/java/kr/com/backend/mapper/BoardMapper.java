@@ -1,5 +1,6 @@
 package kr.com.backend.mapper;
 
+import kr.com.backend.vo.BoardSearchVO;
 import kr.com.backend.vo.BoardVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,7 +10,7 @@ import java.util.List;
 public interface BoardMapper {
 
     // 게시판 리스트
-    List<BoardVO> selectBoardList();
+    List<BoardVO> selectBoardList(BoardSearchVO boardSearchVO);
 
     // 게시판 상세보기
     BoardVO selectBoard(int boardNo);

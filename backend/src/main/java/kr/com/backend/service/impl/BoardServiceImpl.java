@@ -2,6 +2,7 @@ package kr.com.backend.service.impl;
 
 import kr.com.backend.mapper.BoardMapper;
 import kr.com.backend.service.BoardService;
+import kr.com.backend.vo.BoardSearchVO;
 import kr.com.backend.vo.BoardVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,8 @@ public class BoardServiceImpl implements BoardService {
 
     // 게시판 리스트
     @Override
-    public List<BoardVO> selectBoardList() {
-        return boardMapper.selectBoardList();
+    public List<BoardVO> selectBoardList(BoardSearchVO boardSearchVO) {
+        return boardMapper.selectBoardList(boardSearchVO);
     }
 
     // 게시판 상세보기
