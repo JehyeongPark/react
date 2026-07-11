@@ -1,6 +1,7 @@
 package kr.com.backend.controller;
 
 import kr.com.backend.service.BoardService;
+import kr.com.backend.vo.BoardListVO;
 import kr.com.backend.vo.BoardSearchVO;
 import kr.com.backend.vo.BoardVO;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class BoardController {
 
     // 게시판 리스트
     @GetMapping
-    public List<BoardVO> selectBoardList(BoardSearchVO boardSearchVO) {
+    public BoardListVO selectBoardList(BoardSearchVO boardSearchVO) {
         return boardService.selectBoardList(boardSearchVO);
     }
 

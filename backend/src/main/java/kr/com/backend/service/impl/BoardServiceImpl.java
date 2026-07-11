@@ -2,6 +2,7 @@ package kr.com.backend.service.impl;
 
 import kr.com.backend.mapper.BoardMapper;
 import kr.com.backend.service.BoardService;
+import kr.com.backend.vo.BoardListVO;
 import kr.com.backend.vo.BoardSearchVO;
 import kr.com.backend.vo.BoardVO;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +18,10 @@ public class BoardServiceImpl implements BoardService {
 
     // 게시판 리스트
     @Override
-    public List<BoardVO> selectBoardList(BoardSearchVO boardSearchVO) {
-        return boardMapper.selectBoardList(boardSearchVO);
+    public BoardListVO selectBoardList(BoardSearchVO boardSearchVO) {
+        List<BoardVO> list = boardMapper.selectBoardList(boardSearchVO);
+        int totalCount = boardMapper.selectBoardCount(boardSearchVO);
+        return new BoardListVO(list, totalCount);
     }
 
     // 게시판 상세보기

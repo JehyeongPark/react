@@ -12,6 +12,9 @@ public interface BoardMapper {
     // 게시판 리스트
     List<BoardVO> selectBoardList(BoardSearchVO boardSearchVO);
 
+    // 게시판 목록 총 건수
+    int selectBoardCount(BoardSearchVO boardSearchVO);
+
     // 게시판 상세보기
     BoardVO selectBoard(int boardNo);
 

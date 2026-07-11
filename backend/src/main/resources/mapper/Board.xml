@@ -4,6 +4,7 @@
 
 <mapper namespace="kr.com.backend.mapper.BoardMapper">
 
+
     <!-- 게시판 리스트 -->
     <select id="selectBoardList" parameterType="kr.com.backend.vo.BoardSearchVO" resultType="kr.com.backend.vo.BoardVO">
         SELECT
@@ -15,18 +16,21 @@
              , TO_CHAR(UPDATE_DT, 'YYYY-MM-DD HH24:MI') AS UPDATE_DT
         FROM
             TB_BOARD
-        WHERE
-            DEL_YN = 'N'
-            <if test="keyword != null and keyword != ''">
-                <choose>
-                    <when test="searchType == 'writer'">
-                        AND WRITER LIKE '%' || #{keyword} || '%'
-                    </when>
-                    <otherwise>
-                        AND TITLE LIKE '%' || #{keyword} || '%'
-                    </otherwise>
-                </choose>
-            </if>
+        <include refid="boardSearchCondition"/>
+        ORDER BY
+            BOARD_NO DESC
+        OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
+    </select>
+
+    <!-- 게시판 목록 총 건수 -->
+    <select id="selectBoardCount" parameterType="kr.com.backend.vo.BoardSearchVO" resultType="int">
+        SELECT
+        COUNT(*)
+        FROM
+        TB_BOARD
+        <include refid="boardSearchCondition"/>
+        ORDER BY
+        BOARD_NO DESC
     </select>
 
     <!-- 게신판 상세보기 -->
@@ -74,5 +78,22 @@
         WHERE
             BOARD_NO = #{boardNo}
     </update>
+
+    <!-- SQL -->
+    <!-- 게시판 검색 조건 -->
+    <sql id="boardSearchCondition">
+        WHERE
+        DEL_YN = 'N'
+        <if test="keyword != null and keyword != ''">
+            <choose>
+                <when test="searchType == 'writer'">
+                    AND WRITER LIKE '%' || #{keyword} || '%'
+                </when>
+                <otherwise>
+                    AND TITLE LIKE '%' || #{keyword} || '%'
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
 
 </mapper>
