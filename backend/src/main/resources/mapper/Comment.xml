@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.com.backend.mapper.CommentMapper">
+
+    <!-- 댓글 리스트 -->
+    <select id="selectCommentList" resultType="kr.com.backend.vo.CommentVO" parameterType="int">
+        SELECT
+            COMMENT_NO
+             , BOARD_NO
+             , PARENT_COMMENT_NO
+             , WRITER
+             , CONTENT
+             , TO_CHAR(REG_DT, 'YYYY-MM-DD HH24:MI') AS REG_DT
+        FROM
+            TB_COMMENT
+        WHERE
+            BOARD_NO = #{boardNo}
+          AND
+            DEL_YN = 'N'
+        ORDER BY
+            NVL(PARENT_COMMENT_NO, COMMENT_NO)
+               , CASE WHEN PARENT_COMMENT_NO IS NULL THEN 0 ELSE 1 END
+               , REG_DT
+    </select>
+
+    <!-- 댓글 등록 -->
+    <insert id="insertComment" parameterType="kr.com.backend.vo.CommentVO">
+        INSERT INTO TB_COMMENT
+            (COMMENT_NO,
+             BOARD_NO,
+             PARENT_COMMENT_NO,
+             WRITER,
+             CONTENT,
+             REG_DT)
+        VALUES
+            ((SELECT NVL(MAX(COMMENT_NO), 0) + 1 FROM TB_COMMENT), #{boardNo}, #{parentCommentNo, jdbcType=NUMERIC}, #{writer}, #{content}, SYSDATE)
+    </insert>
+
+</mapper>
