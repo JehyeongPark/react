@@ -44,12 +44,20 @@ function BoardDetail() {
        .catch(err => console.error(err))
   }
 
-  // 삭제
-  const handleDelete = async () => {
-    if (!window.confirm('삭제하시겠습니까?')) return
-    await api.delete(`/board/${boardNo}`)
-    navigate('/board')
-  }
+   // 삭제
+   const handleDelete = async () => {
+     if (!window.confirm('삭제하시겠습니까?')) return
+     await api.delete(`/board/${boardNo}`)
+     navigate('/board')
+   }
+
+    // 댓글 삭제
+    const handleCommentDelete = (commentNo) => {
+      if (!window.confirm('댓글을 삭제하시겠습니까?')) return
+      api.delete(`/board/${boardNo}/comment/${commentNo}`)
+        .then(() => fetchCommentList())
+        .catch(err => console.error(err))
+    }
 
   if (!board) {
     return null
@@ -84,15 +92,21 @@ function BoardDetail() {
             {commentList.length === 0 ? (
               <li className="comment-empty">등록된 댓글이 없습니다.</li>
             ) : (
-              commentList.map(comment => (
-                <li key={comment.commentNo} className="comment-item">
-                  <div className="comment-meta">
-                    <span className="comment-writer">{comment.writer}</span>
-                    <span className="comment-date">{comment.regDt}</span>
-                  </div>
-                  <div className="comment-content">{comment.content}</div>
-                </li>
-              ))
+                commentList.map(comment => (
+                  <li key={comment.commentNo} className="comment-item">
+                    <div className="comment-meta">
+                      <span className="comment-writer">{comment.writer}</span>
+                      <span className="comment-date">{comment.regDt}</span>
+                      <button
+                        className="comment-delete-btn"
+                        onClick={() => handleCommentDelete(comment.commentNo)}
+                      >
+                        삭제
+                      </button>
+                    </div>
+                    <div className="comment-content">{comment.content}</div>
+                  </li>
+                ))
             )}
           </ul>
   
