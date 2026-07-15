@@ -38,4 +38,13 @@
             ((SELECT NVL(MAX(COMMENT_NO), 0) + 1 FROM TB_COMMENT), #{boardNo}, #{parentCommentNo, jdbcType=NUMERIC}, #{writer}, #{content}, SYSDATE)
     </insert>
 
+    <!-- 댓글 삭제 -->
+    <update id="deleteComment" parameterType="int">
+        UPDATE TB_COMMENT
+        SET
+            DEL_YN = 'Y'
+        WHERE
+            COMMENT_NO = #{commentNo}
+    </update>
+
 </mapper>

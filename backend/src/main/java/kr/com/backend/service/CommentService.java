@@ -12,4 +12,7 @@ public interface CommentService {
     // 댓글 등록
     void insertComment(CommentVO comment);
 
+    // 댓글 삭제
+    void deleteComment(int commentNo);
+
 }

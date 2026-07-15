@@ -26,4 +26,10 @@ public class CommentController {
         commentService.insertComment(comment);
     }
 
+    // 댓글 삭제
+    @DeleteMapping("/board/{boardNo}/comment/{commentNo}")
+    public void deleteComment(@PathVariable int boardNo, @PathVariable int commentNo) {
+        commentService.deleteComment(commentNo);
+    }
+
 }
