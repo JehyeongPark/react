@@ -26,6 +26,13 @@ public class CommentController {
         commentService.insertComment(comment);
     }
 
+    // 댓글 수정
+    @PutMapping("/board/{boardNo}/comment/{commentNo}")
+    public void updateComment(@PathVariable int boardNo, @PathVariable int commentNo, @RequestBody CommentVO comment) {
+        comment.setCommentNo(commentNo);
+        commentService.updateComment(comment);
+    }
+
     // 댓글 삭제
     @DeleteMapping("/board/{boardNo}/comment/{commentNo}")
     public void deleteComment(@PathVariable int boardNo, @PathVariable int commentNo) {
