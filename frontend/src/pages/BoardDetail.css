@@ -128,3 +128,34 @@
     .comment-delete-btn:hover {
       color: #e5484d;
     }
+    
+
+    .comment-edit-btn {
+    padding: 2px 6px;
+    font-size: 12px;
+    color: #999;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .comment-edit-btn:hover {
+    color: #333;
+  }
+
+  .comment-delete-btn {
+    margin-left: 0;
+  }
+
+  .comment-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .comment-edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
