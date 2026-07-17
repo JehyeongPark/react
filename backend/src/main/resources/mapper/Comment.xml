@@ -25,6 +25,22 @@
                , REG_DT
     </select>
 
+    <!-- 대댓글 조회 -->
+    <select id="selectComment" resultType="kr.com.backend.vo.CommentVO" parameterType="int">
+        SELECT
+            COMMENT_NO
+             , BOARD_NO
+             , PARENT_COMMENT_NO
+             , WRITER
+             , CONTENT
+        FROM
+            TB_COMMENT
+        WHERE
+            COMMENT_NO = #{commentNo}
+          AND
+            DEL_YN = 'N'
+    </select>
+
     <!-- 댓글 등록 -->
     <insert id="insertComment" parameterType="kr.com.backend.vo.CommentVO">
         INSERT INTO TB_COMMENT

@@ -11,6 +11,9 @@ public interface CommentMapper {
     // 댓글 리스트
     List<CommentVO> selectCommentList(int boardNo);
 
+    // 대댓글
+    CommentVO selectComment(int commentNo);   // 추가
+
     // 댓글 등록
     void insertComment(CommentVO comment);
 

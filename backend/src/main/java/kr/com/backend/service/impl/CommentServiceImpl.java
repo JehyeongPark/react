@@ -23,6 +23,15 @@ public class CommentServiceImpl implements CommentService {
     // 댓글 등록
     @Override
     public void insertComment(CommentVO comment) {
+        if (comment.getParentCommentNo() != null) {
+            CommentVO parent = commentMapper.selectComment(comment.getParentCommentNo());
+            if (parent == null) {
+                throw new IllegalArgumentException("존재하지 않는 댓글입니다.");
+            }
+            if (parent.getParentCommentNo() != null) {
+                throw new IllegalArgumentException("대댓글에는 답글을 작성할 수 없습니다.");
+            }
+        }
         commentMapper.insertComment(comment);
     }
 
