@@ -12,6 +12,12 @@ function BoardDetail() {
   const [content, setContent] = useState('')
   const [editingCommentNo, setEditingCommentNo] = useState(null)
   const [editContent, setEditContent] = useState('')
+
+  // 답글 관련 상태
+  const [replyingTo, setReplyingTo] = useState(null)
+  const [replyWriter, setReplyWriter] = useState('')
+  const [replyContent, setReplyContent] = useState('')
+
   const navigate = useNavigate()
 
   // 상세
@@ -31,6 +37,14 @@ function BoardDetail() {
     useEffect(() => {
       fetchCommentList()
     }, [boardNo])
+
+  // 댓글 목록(flat) -> 부모/자식 트리로 변환
+  const commentTree = commentList
+    .filter(c => !c.parentCommentNo)
+    .map(parent => ({
+      ...parent,
+      replies: commentList.filter(c => c.parentCommentNo === parent.commentNo)
+    }))
   
    // 댓글 등록
    const handleCommentSubmit = () => {
@@ -88,9 +102,41 @@ function BoardDetail() {
           .catch(err => console.error(err))
       }
 
-  if (!board) {
-    return null
-  }
+    // 답글 작성 시작
+    const handleReplyStart = (commentNo) => {
+      setReplyingTo(commentNo)
+      setReplyWriter('')
+      setReplyContent('')
+    }
+
+    // 답글 작성 취소
+    const handleReplyCancel = () => {
+      setReplyingTo(null)
+      setReplyWriter('')
+      setReplyContent('')
+    }
+
+    // 답글 등록
+    const handleReplySubmit = (parentCommentNo) => {
+      if (!replyWriter.trim() || !replyContent.trim()) {
+        alert('작성자와 내용을 입력해주세요.')
+        return
+      }
+      api.post(`/board/${boardNo}/comment`, {
+        writer: replyWriter,
+        content: replyContent,
+        parentCommentNo
+      })
+        .then(() => {
+          handleReplyCancel()
+          fetchCommentList()
+        })
+        .catch(err => console.error(err))
+    }
+
+    if (!board) {
+      return null
+    }
 
     return (
       <div className="container">
@@ -115,13 +161,13 @@ function BoardDetail() {
             <button className="btn-danger" onClick={handleDelete}>삭제</button>
          </div>
           <div className="comment-section">
-            <h2 className="comment-title">댓글 {commentList.length}</h2>
+              <h2 className="comment-title">댓글 {commentList.length}</h2>
 
-            <ul className="comment-list">
-              {commentList.length === 0 ? (
-                <li className="comment-empty">등록된 댓글이 없습니다.</li>
-              ) : (
-                  commentList.map(comment => (
+              <ul className="comment-list">
+                {commentTree.length === 0 ? (
+                  <li className="comment-empty">등록된 댓글이 없습니다.</li>
+                ) : (
+                  commentTree.map(comment => (
                     <li key={comment.commentNo} className="comment-item">
                       <div className="comment-meta">
                         <span className="comment-writer">{comment.writer}</span>
@@ -129,6 +175,12 @@ function BoardDetail() {
                         {comment.updateDt && <span className="comment-date">(수정됨 {comment.updateDt})</span>}
                         {editingCommentNo !== comment.commentNo && (
                           <>
+                            <button
+                              className="comment-reply-btn"
+                              onClick={() => handleReplyStart(comment.commentNo)}
+                            >
+                              답글
+                            </button>
                             <button
                               className="comment-edit-btn"
                               onClick={() => handleCommentEditStart(comment)}
@@ -159,28 +211,95 @@ function BoardDetail() {
                       ) : (
                         <div className="comment-content">{comment.content}</div>
                       )}
+
+                      {replyingTo === comment.commentNo && (
+                        <div className="comment-reply-form">
+                          <input
+                            type="text"
+                            className="comment-writer-input"
+                            placeholder="작성자"
+                            value={replyWriter}
+                            onChange={(e) => setReplyWriter(e.target.value)}
+                          />
+                          <textarea
+                            className="comment-content-input"
+                            placeholder="답글을 입력하세요"
+                            value={replyContent}
+                            onChange={(e) => setReplyContent(e.target.value)}
+                          />
+                          <div className="comment-edit-actions">
+                            <button className="btn-secondary" onClick={handleReplyCancel}>취소</button>
+                            <button className="btn-primary" onClick={() => handleReplySubmit(comment.commentNo)}>등록</button>
+                          </div>
+                        </div>
+                      )}
+
+                      {comment.replies.length > 0 && (
+                        <ul className="comment-replies">
+                          {comment.replies.map(reply => (
+                            <li key={reply.commentNo} className="comment-item comment-reply">
+                              <div className="comment-meta">
+                                <span className="comment-writer">{reply.writer}</span>
+                                <span className="comment-date">{reply.regDt}</span>
+                                {reply.updateDt && <span className="comment-date">(수정됨 {reply.updateDt})</span>}
+                                {editingCommentNo !== reply.commentNo && (
+                                  <>
+                                    <button
+                                      className="comment-edit-btn"
+                                      onClick={() => handleCommentEditStart(reply)}
+                                    >
+                                      수정
+                                    </button>
+                                    <button
+                                      className="comment-delete-btn"
+                                      onClick={() => handleCommentDelete(reply.commentNo)}
+                                    >
+                                      삭제
+                                    </button>
+                                  </>
+                                )}
+                              </div>
+                              {editingCommentNo === reply.commentNo ? (
+                                <div className="comment-edit-form">
+                                  <textarea
+                                    className="comment-content-input"
+                                    value={editContent}
+                                    onChange={(e) => setEditContent(e.target.value)}
+                                  />
+                                  <div className="comment-edit-actions">
+                                    <button className="btn-secondary" onClick={handleCommentEditCancel}>취소</button>
+                                    <button className="btn-primary" onClick={() => handleCommentEditSubmit(reply.commentNo)}>저장</button>
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="comment-content">{reply.content}</div>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </li>
                   ))
-              )}
-            </ul>
+                )}
+              </ul>
 
-            <div className="comment-form">
-              <input
-                type="text"
-                className="comment-writer-input"
-                placeholder="작성자"
-                value={writer}
-                onChange={(e) => setWriter(e.target.value)}
-              />
-              <textarea
-                className="comment-content-input"
-                placeholder="댓글을 입력하세요"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
-              <button className="btn-primary comment-submit-btn" onClick={handleCommentSubmit}>등록</button>
+              <div className="comment-form">
+                <input
+                  type="text"
+                  className="comment-writer-input"
+                  placeholder="작성자"
+                  value={writer}
+                  onChange={(e) => setWriter(e.target.value)}
+                />
+                <textarea
+                  className="comment-content-input"
+                  placeholder="댓글을 입력하세요"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                />
+                <button className="btn-primary comment-submit-btn" onClick={handleCommentSubmit}>등록</button>
+              </div>
             </div>
-          </div>
       </div>
     )
   }
