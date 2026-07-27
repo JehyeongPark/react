@@ -1,7 +1,8 @@
 package kr.com.backend.controller;
 
 import kr.com.backend.config.JwtTokenProvider;
-import lombok.Data;
+import kr.com.backend.service.UserService;
+import kr.com.backend.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,19 +17,20 @@ public class UserController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
+    private final UserService userService;
 
     @PostMapping("/login")
-    public Map<String, String> login(@RequestBody LoginRequest req) {
+    public Map<String, String> login(@RequestBody UserVO user) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(req.getUserId(), req.getPassword()));
+                new UsernamePasswordAuthenticationToken(user.getUserId(), user.getPassword()));
 
-        String token = jwtTokenProvider.createToken(req.getUserId());
+        String token = jwtTokenProvider.createToken(user.getUserId());
         return Map.of("token", token);
     }
 
-    @Data
-    static class LoginRequest {
-        private String userId;
-        private String password;
+    // 회원 가입 (일반)
+    @PostMapping("/signup")
+    public void insertUser(@RequestBody UserVO user) {
+        userService.insertUser(user);
     }
 }

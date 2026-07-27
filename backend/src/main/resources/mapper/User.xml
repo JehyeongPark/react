@@ -15,4 +15,20 @@
             USER_ID = #{userId}
     </select>
 
+
+    <!-- 회원 가입 (일반) -->
+    <insert id="insertUser" parameterType="kr.com.backend.vo.UserVO">
+        INSERT INTO TB_USER (
+                              USER_ID
+                            , PASSWORD
+                            , USER_NAME
+                            , USER_AUTH
+        ) VALUES (
+                   #{userId}
+                 , #{password}
+                 , #{userName}
+                 , 2
+                 )
+    </insert>
+
 </mapper>
