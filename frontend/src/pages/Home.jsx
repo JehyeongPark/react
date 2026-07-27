@@ -8,8 +8,11 @@ function Home() {
   return (
     <div className="container home-container">
       <h1 className="home-title">환영합니다</h1>
-      <p className="home-desc">아래 버튼을 눌러 게시판으로 이동하세요.</p>
-      <button className="btn-primary enter-btn" onClick={() => navigate('/board')}>게시판 입장</button>
+      <p className="home-desc">게시판 이용을 위해선 로그인이 필요합니다.</p>
+      <div className="home-actions">
+        <button className="btn-primary enter-btn" onClick={() => navigate('/login')}>로그인</button>
+        <button className="btn-secondary enter-btn" onClick={() => navigate('/signup')}>회원가입</button>
+      </div>
     </div>
   )
 }
